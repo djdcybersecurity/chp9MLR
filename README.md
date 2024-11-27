@@ -1,7 +1,17 @@
 # multiple-linear-regression-calculator
 
-## Overview
-This repository contains two Python scripts: `mlr.py` and `vif.py`, which perform Multiple Linear Regression (MLR) and Variance Inflation Factor (VIF) analysis on the `mtcars` dataset.
+
+
+#General Directory Structure
+chp9MLR/
+├── results/
+├── scripts/
+│   ├── regression_analysis.py
+│   ├── vif.py
+│   ├── mtcars.csv
+├── .gitignore
+├── README.md
+
 
 ## Prerequisites
 
