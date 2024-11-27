@@ -1,52 +1,44 @@
 import pandas as pd
 import statsmodels.api as sm
 from statsmodels.stats.outliers_influence import variance_inflation_factor
-import matplotlib.pyplot as plt
 
 # Load dataset
-mtcars = pd.read_csv("path_to_mtcars.csv")
+data = pd.read_csv('../data/mtcars.csv')
 
-# Select variables
-mtcars = mtcars[['mpg', 'wt', 'qsec', 'cyl', 'hp']]
+# Define the independent variables (predictors)
+X = data[['wt', 'qsec', 'cyl', 'hp']]
+X = sm.add_constant(X)  # Add a constant term for the intercept
 
-# Prepare data for regression
-X = mtcars[['wt', 'qsec', 'cyl', 'hp']]
-y = mtcars['mpg']
-X = sm.add_constant(X)
+# Define the dependent variable (target)
+y = data['mpg']
 
-# Fit the model
+# Fit the regression model
 model = sm.OLS(y, X).fit()
 
-# R² and Adjusted R²
-print("R²:", model.rsquared)
-print("Adjusted R²:", model.rsquared_adj)
+# Print the summary
+print(model.summary())
 
-# Confidence intervals
-print("Confidence Intervals:")
-print(model.conf_int())
-
-# Variance Inflation Factor (VIF)
+# Calculate Variance Inflation Factor (VIF) for each predictor
 vif_data = pd.DataFrame()
-vif_data["Feature"] = X.columns
-vif_data["VIF"] = [variance_inflation_factor(X.values, i) for i in range(X.shape[1])]
+vif_data['Feature'] = X.columns
+vif_data['VIF'] = [variance_inflation_factor(X.values, i) for i in range(X.shape[1])]
 print(vif_data)
 
-# Residual diagnostics
-residuals = model.resid
-fitted = model.fittedvalues
 
-plt.figure(figsize=(12, 6))
-plt.subplot(1, 2, 1)
-plt.scatter(fitted, residuals, alpha=0.5)
-plt.axhline(0, color='red', linestyle='--')
+# Save VIF to a CSV
+vif_data.to_csv('../results/vif.csv', index=False)
+
+# Save regression summary to a text file
+with open('../results/regression_summary.txt', 'w') as f:
+    f.write(model.summary().as_text())
+
+# Save residuals plot (optional)
+import matplotlib.pyplot as plt
+
+plt.scatter(model.fittedvalues, model.resid)
 plt.xlabel('Fitted Values')
 plt.ylabel('Residuals')
 plt.title('Residuals vs Fitted')
+plt.savefig('../results/residual_plot.png')
+plt.close()
 
-plt.subplot(1, 2, 2)
-plt.hist(residuals, bins=15, edgecolor='k', alpha=0.7)
-plt.title('Histogram of Residuals')
-plt.xlabel('Residuals')
-plt.ylabel('Frequency')
-plt.tight_layout()
-plt.show()

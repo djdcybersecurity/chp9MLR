@@ -1,0 +1,30 @@
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                    mpg   R-squared:                       0.844
+Model:                            OLS   Adj. R-squared:                  0.821
+Method:                 Least Squares   F-statistic:                     36.63
+Date:                Wed, 27 Nov 2024   Prob (F-statistic):           1.53e-10
+Time:                        04:39:28   Log-Likelihood:                -72.611
+No. Observations:                  32   AIC:                             155.2
+Df Residuals:                      27   BIC:                             162.6
+Df Model:                           4                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         34.2808      9.792      3.501      0.002      14.190      54.371
+wt            -3.4794      1.008     -3.451      0.002      -5.548      -1.411
+qsec           0.2262      0.487      0.465      0.646      -0.773       1.225
+cyl           -0.8099      0.627     -1.292      0.207      -2.096       0.476
+hp            -0.0138      0.015     -0.911      0.370      -0.045       0.017
+==============================================================================
+Omnibus:                        4.893   Durbin-Watson:                   1.636
+Prob(Omnibus):                  0.087   Jarque-Bera (JB):                3.666
+Skew:                           0.815   Prob(JB):                        0.160
+Kurtosis:                       3.305   Cond. No.                     3.54e+03
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 3.54e+03. This might indicate that there are
+strong multicollinearity or other numerical problems.
