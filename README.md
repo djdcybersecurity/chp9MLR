@@ -1,6 +1,6 @@
 
 
-# Multiple Linear Regression Calculator
+# Multiple Linear Regression Calculator Using Car Dataset
 
 ## Directory Structure
 ```
